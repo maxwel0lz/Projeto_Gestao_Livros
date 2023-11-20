@@ -7,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class ModelLivros extends AbstractTableModel{
     
+    ConexaoBD bd = new ConexaoBD();
     ArrayList<Livros> livro = new ArrayList();
     String[] coluna = {"Título","Categoria","Ano","Autor","Valor","Quantidade" }; 
     
@@ -15,7 +16,8 @@ public class ModelLivros extends AbstractTableModel{
         return livro.size();
     }
     public void cadastarLivro(Livros l){
-        livro.add(l);
+        bd.inserirLivro(l);
+        bd.selecionarLivro();
         this.fireTableDataChanged();
     }
     public void EditarLivro(int index, Livros l){

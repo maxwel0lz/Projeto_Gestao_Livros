@@ -10,6 +10,10 @@ public class Livros {
     private String autor;
     private String valor;
     private String quantidade;
+    
+    public Livros(){
+        
+    }
 
     public Livros(int id, String titulo, String categoria, String ano, String autor, String valor, String quantidade) {
         this.id = id;
@@ -20,9 +24,7 @@ public class Livros {
         this.valor = valor;
         this.quantidade = quantidade;
     }
-    public void incrementarId(){
-        this.id =  + 1;
-    } 
+    
     
     public int getId() {
         return id;
