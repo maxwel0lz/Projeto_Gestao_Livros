@@ -10,8 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConexaoBD {
+    // Conexão com o banco de dados
     public static Connection Conectar(){
-        Connection conectar=null;
+        Connection conectar= null;
         String driver = "com.mysql.cj.jdbc.Driver";
         String endereco = "jdbc:mysql://localhost:3306/dblivros";
         String usuario = "root";
@@ -19,12 +20,13 @@ public class ConexaoBD {
         try {
             Class.forName( driver);
             conectar = (Connection) DriverManager.getConnection(endereco, usuario, senha);
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             return null;
         }
         return conectar;
     }
     
+    //Metodo para adicionar um novo livro no banco de dados
     public void inserirLivro(Livros livro){
         String sql = "insert into tblivros(titulo,categoria,ano,autor,valor,quantidade) Values(?,?,?,?,?,?)";
         Connection conectar = Conectar();
@@ -44,10 +46,12 @@ public class ConexaoBD {
         
         try {
             conectar.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         
     }
+    
+    // Metodo para Ler e retornar informações para o banco de dados e salva na Array de ModelLivros
     public ArrayList<Livros> selecionarLivro(ArrayList<Livros> livros){
         Connection conectar = Conectar();
         String sql = "SELECT * FROM dblivros.tblivros";
@@ -76,6 +80,8 @@ public class ConexaoBD {
         }
         return livros;
     }
+    
+    //Metodo para ler Banco de dados
     public ArrayList<Livros> selecionarLivro(){
         Connection conectar = Conectar();
         String sql = "SELECT * FROM dblivros.tblivros";
@@ -104,4 +110,47 @@ public class ConexaoBD {
         } catch (SQLException e) {}
         return livros;
     }
+    
+    public void editarLivro(Livros livro){
+       Connection conectar = Conectar();
+       String sql = "UPDATE  dblivros.tblivros set titulo = ?,categoria = ?,ano = ?,autor = ?,valor = ?,quantidade = ? WHERE idlivros = ?";
+       
+        try {
+            PreparedStatement preparar = conectar.prepareStatement(sql);
+            preparar.setString(1, livro.getTitulo());
+            preparar.setString(2, livro.getCategoria());
+            preparar.setInt(3, parseInt(livro.getAno()));
+            preparar.setString(4, livro.getAutor());
+            preparar.setFloat(5, parseFloat(livro.getValor()));
+            preparar.setInt(6, parseInt(livro.getQuantidade()));
+            preparar.setInt(7, livro.getId());
+            preparar.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            conectar.close();
+        } catch (SQLException e) {
+        }
+       
+    }
+    
+    public void Excluir (int id){
+      Connection conectar = Conectar();  
+      String sql = "DELETE FROM dblivros.tblivros WHERE idlivros = ?";
+        try {
+            PreparedStatement preparar = conectar.prepareStatement(sql);
+            preparar.setInt(1, id);
+            preparar.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         try {
+            conectar.close();
+        } catch (SQLException e) {
+        }
+    } 
+    
+    
 }

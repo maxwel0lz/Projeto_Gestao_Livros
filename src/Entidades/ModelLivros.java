@@ -9,7 +9,7 @@ public class ModelLivros extends AbstractTableModel{
     
     ConexaoBD bd = new ConexaoBD();
     ArrayList<Livros> livro = new ArrayList();
-    String[] coluna = {"Título","Categoria","Ano","Autor","Valor","Quantidade" }; 
+    String[] coluna = {"Id","Título","Categoria","Ano","Autor","Valor","Quantidade" }; 
     
     @Override
     public int getRowCount() {
@@ -23,16 +23,28 @@ public class ModelLivros extends AbstractTableModel{
     
     public void cadastarLivro(Livros l){
         bd.inserirLivro(l);
+        livro.clear();
         bd.selecionarLivro(livro);
+        
         this.fireTableDataChanged();
         
     }
-    public void EditarLivro(int index, Livros l){
-        livro.set(index, l);
+    public int getId (int index){
+        Livros li = livro.get(index);
+        
+        return li.getId();
+    }
+    
+    public void EditarLivro(Livros l){
+        bd.editarLivro(l);
+        livro.clear();
+        bd.selecionarLivro(livro);
         this.fireTableDataChanged();
     }
     public void ExcluirLivro(int index){
-        livro.remove(index);
+        bd.Excluir(index);
+        livro.clear();
+        bd.selecionarLivro(livro);
         this.fireTableDataChanged();
     } 
 
@@ -50,14 +62,16 @@ public class ModelLivros extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return livro.get(rowIndex).getTitulo();
+                return livro.get(rowIndex).getId();
             case 1:
-                return livro.get(rowIndex).getCategoria();
+                return livro.get(rowIndex).getTitulo();
             case 2:
-                return livro.get(rowIndex).getAno();
+                return livro.get(rowIndex).getCategoria();
             case 3:
-                return livro.get(rowIndex).getAutor();
+               return livro.get(rowIndex).getAno();
             case 4:
+                 return livro.get(rowIndex).getAutor();
+            case 5:
                 return livro.get(rowIndex).getValor();
             default:
                 return livro.get(rowIndex).getQuantidade();

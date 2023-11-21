@@ -259,25 +259,12 @@ public class Home extends javax.swing.JFrame {
        txt_titulo.setText(""); txt_categoria.setText("");txt_ano.setText("");txt_autor.setText("");txt_valor.setText("");txt_quantidade.setText("");
     }
     
-    /*public void lerTabela(){
-        
-        
-        for(Livros l: bd.selecionarLivro()){
-            modelo.addRow(new Object[]{
-                l.getTitulo(),
-                l.getCategoria(),
-                l.getAno(),
-                l.getAutor(),
-                l.getValor(),
-                l.getQuantidade()
-            });
-        }
-        
-    }*/
+    
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
        Livros l = InfoLivro();
-       int index = tabela.getSelectedRow();
-       this.model.EditarLivro(index, l);
+       
+       this.model.EditarLivro(l);
+       Limpar();
     }//GEN-LAST:event_EditarActionPerformed
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
@@ -287,7 +274,7 @@ public class Home extends javax.swing.JFrame {
        
     }//GEN-LAST:event_CadastrarActionPerformed
     private Livros InfoLivro(){
-        int id = model.getRowCount();
+        int id = model.getId( tabela.getSelectedRow());
         String titulo = txt_titulo.getText();
         String categoria = txt_categoria.getText();
         String ano = txt_ano.getText();
@@ -296,6 +283,7 @@ public class Home extends javax.swing.JFrame {
         String quantidade = txt_quantidade.getText();
         return new Livros(id,titulo,categoria,ano,autor,valor,quantidade);
     }
+    
     
     private void txt_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_categoriaActionPerformed
         // TODO add your handling code here:
@@ -311,17 +299,17 @@ public class Home extends javax.swing.JFrame {
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         int index = tabela.getSelectedRow();
-        txt_titulo.setText((String) model.getValueAt(index,0));
-        txt_categoria.setText((String) model.getValueAt(index,1));
-        txt_ano.setText((String) model.getValueAt(index,2));
-        txt_autor.setText((String) model.getValueAt(index,3));
-        txt_valor.setText((String) model.getValueAt(index,4));
-        txt_quantidade.setText((String) model.getValueAt(index,5));
+        txt_titulo.setText((String) model.getValueAt(index,1));
+        txt_categoria.setText((String) model.getValueAt(index,2));
+        txt_ano.setText((String) model.getValueAt(index,3));
+        txt_autor.setText((String) model.getValueAt(index,4));
+        txt_valor.setText((String) model.getValueAt(index,5));
+        txt_quantidade.setText((String) model.getValueAt(index,6));
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
-        int index = tabela.getSelectedRow();
-        this.model.ExcluirLivro(index);
+       int id = model.getId(tabela.getSelectedRow());
+       model.ExcluirLivro(id);
     }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void claerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claerActionPerformed
