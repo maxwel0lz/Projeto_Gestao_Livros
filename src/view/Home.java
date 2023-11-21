@@ -1,18 +1,24 @@
 
 package view;
 
+import Entidades.ConexaoBD;
 import Entidades.Livros;
 import Entidades.ModelLivros;
+import javax.swing.table.DefaultTableModel;
+
 //import javax.swing.JOptionPane;
 
 
 
 public class Home extends javax.swing.JFrame {
     ModelLivros model = new ModelLivros();
+    ConexaoBD bd = new ConexaoBD();
+    
     
     public Home() {
         initComponents();
         tabela.setModel(model);
+        model.LerLivro();
     }
 
 
@@ -252,6 +258,22 @@ public class Home extends javax.swing.JFrame {
     private void Limpar(){
        txt_titulo.setText(""); txt_categoria.setText("");txt_ano.setText("");txt_autor.setText("");txt_valor.setText("");txt_quantidade.setText("");
     }
+    
+    /*public void lerTabela(){
+        
+        
+        for(Livros l: bd.selecionarLivro()){
+            modelo.addRow(new Object[]{
+                l.getTitulo(),
+                l.getCategoria(),
+                l.getAno(),
+                l.getAutor(),
+                l.getValor(),
+                l.getQuantidade()
+            });
+        }
+        
+    }*/
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
        Livros l = InfoLivro();
        int index = tabela.getSelectedRow();

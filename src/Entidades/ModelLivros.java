@@ -15,10 +15,17 @@ public class ModelLivros extends AbstractTableModel{
     public int getRowCount() {
         return livro.size();
     }
+    public void LerLivro(){
+        bd.selecionarLivro(livro);
+        this.fireTableDataChanged();
+        
+    }
+    
     public void cadastarLivro(Livros l){
         bd.inserirLivro(l);
-        bd.selecionarLivro();
+        bd.selecionarLivro(livro);
         this.fireTableDataChanged();
+        
     }
     public void EditarLivro(int index, Livros l){
         livro.set(index, l);

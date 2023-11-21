@@ -48,11 +48,11 @@ public class ConexaoBD {
         }
         
     }
-    public ArrayList<Livros> selecionarLivro(){
+    public ArrayList<Livros> selecionarLivro(ArrayList<Livros> livros){
         Connection conectar = Conectar();
         String sql = "SELECT * FROM dblivros.tblivros";
         Statement st = null;
-        ArrayList<Livros> livros = new ArrayList();
+        
         try {
             st = conectar.createStatement();
             ResultSet resu = st.executeQuery(sql);
@@ -76,5 +76,32 @@ public class ConexaoBD {
         }
         return livros;
     }
-
+    public ArrayList<Livros> selecionarLivro(){
+        Connection conectar = Conectar();
+        String sql = "SELECT * FROM dblivros.tblivros";
+        Statement st = null;
+        ArrayList<Livros> livros = new ArrayList();
+        try {
+            st = conectar.createStatement();
+            ResultSet resu = st.executeQuery(sql);
+            
+            while(resu.next()){
+                Livros livro = new Livros();
+                livro.SetId(resu.getInt("idlivros"));
+                livro.setTitulo(resu.getString("Titulo"));
+                livro.setCategoria(resu.getString("Categoria"));
+                livro.setAno(String.valueOf(resu.getInt("Ano")));
+                livro.setAutor(resu.getString("Autor"));
+                livro.setValor(String.valueOf(resu.getFloat("Valor")));
+                livro.setQuantidade(String.valueOf(resu.getInt("Quantidade")));
+                livros.add(livro);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conectar.close();
+        } catch (SQLException e) {}
+        return livros;
+    }
 }
