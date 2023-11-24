@@ -4,15 +4,16 @@ package Entidades;
 import java.util.ArrayList;
 
 public class ModelAdministrador {
-    ArrayList<Administrador> adm = new ArrayList();
+    ConexaoBD bd = new ConexaoBD();
+    ArrayList<Administrador> arrAdm = new ArrayList();
     
     public void cadastrarAdm (Administrador adm){
-        this.adm.add(adm);
+        bd.criarAdministrador(arrAdm, adm);
     }
 
     public boolean verificar(Administrador adm) {
         boolean aux = false;
-        for (Administrador item : this.adm){
+        for (Administrador item : this.arrAdm){
            
             
             String nome1 = adm.getNome();

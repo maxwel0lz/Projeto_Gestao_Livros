@@ -195,10 +195,11 @@ public class FaceLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_senhaActionPerformed
 
     private void bnt_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_entrarActionPerformed
-    String email = txt_ususario.getText();
+    String nome = "";
+    String usuario = txt_ususario.getText();
     String senha = String.valueOf(txt_senha.getPassword());
     
-    Administrador adm = new Administrador(email, senha);
+    Administrador adm = new Administrador(nome,usuario, senha);
     
         if (modeladm.verificar(adm)){
             Home home = new Home();

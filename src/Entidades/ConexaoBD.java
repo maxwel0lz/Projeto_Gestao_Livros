@@ -27,7 +27,7 @@ public class ConexaoBD {
     }
     
     //Metodo para adicionar um novo livro no banco de dados
-    public void inserirLivro(Livros livro){
+    public void criarLivro(Livros livro){
         String sql = "insert into tblivros(titulo,categoria,ano,autor,valor,quantidade) Values(?,?,?,?,?,?)";
         Connection conectar = Conectar();
         
@@ -136,7 +136,7 @@ public class ConexaoBD {
        
     }
     
-    public void Excluir (int id){
+    public void excluirLivro (int id){
       Connection conectar = Conectar();  
       String sql = "DELETE FROM dblivros.tblivros WHERE idlivros = ?";
         try {
@@ -150,7 +150,29 @@ public class ConexaoBD {
             conectar.close();
         } catch (SQLException e) {
         }
-    } 
+    }
+    
+    public ArrayList<Administrador> criarAdministrador(ArrayList<Administrador> arrAdm,Administrador adm){
+       Connection conectar = Conectar();
+       String sql = "insert into tbusuarios(nome,usuario,senha) Values(?,?,?)";
+       
+        try {
+            PreparedStatement preparar = conectar.prepareStatement(sql);
+            preparar.setString(1, adm.getNome());
+            preparar.setString(2, adm.getUsuario());
+            preparar.setString(3,adm.getSenha());
+            preparar.execute();
+            arrAdm.add(adm);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conectar.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrAdm;
+    }
     
     
 }

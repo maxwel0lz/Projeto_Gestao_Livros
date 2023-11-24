@@ -19,6 +19,7 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         tabela.setModel(model);
         model.LerLivro();
+        
     }
 
 
@@ -268,11 +269,22 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_EditarActionPerformed
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
-        Livros l = InfoLivro();
+        Livros l = InfoLivroCadastrar();
         this.model.cadastarLivro(l);
         Limpar();
-       
     }//GEN-LAST:event_CadastrarActionPerformed
+    
+    private Livros InfoLivroCadastrar(){
+        int id = model.getRowCount();
+        String titulo = txt_titulo.getText();
+        String categoria = txt_categoria.getText();
+        String ano = txt_ano.getText();
+        String autor = txt_autor.getText();
+        String valor = txt_valor.getText();
+        String quantidade = txt_quantidade.getText();
+        return new Livros(id,titulo,categoria,ano,autor,valor,quantidade);
+    }
+    
     private Livros InfoLivro(){
         int id = model.getId( tabela.getSelectedRow());
         String titulo = txt_titulo.getText();

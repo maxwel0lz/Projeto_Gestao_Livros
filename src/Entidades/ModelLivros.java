@@ -22,12 +22,15 @@ public class ModelLivros extends AbstractTableModel{
     }
     
     public void cadastarLivro(Livros l){
-        bd.inserirLivro(l);
+        bd.criarLivro(l);
         livro.clear();
         bd.selecionarLivro(livro);
-        
         this.fireTableDataChanged();
         
+    }
+    
+    public void limparLista(){
+        livro.clear();
     }
     public int getId (int index){
         Livros li = livro.get(index);
@@ -42,7 +45,7 @@ public class ModelLivros extends AbstractTableModel{
         this.fireTableDataChanged();
     }
     public void ExcluirLivro(int index){
-        bd.Excluir(index);
+        bd.excluirLivro(index);
         livro.clear();
         bd.selecionarLivro(livro);
         this.fireTableDataChanged();
