@@ -12,12 +12,13 @@ public class ModelAdministrador {
     }
 
     public boolean verificar(Administrador adm) {
+        bd.LerAdministrador(arrAdm);
         boolean aux = false;
         for (Administrador item : this.arrAdm){
            
             
-            String nome1 = adm.getNome();
-            String nome2 = item.getNome();
+            String nome1 = adm.getUsuario();
+            String nome2 = item.getUsuario();
             String senha1 = adm.getSenha();
             String senha2 = item.getSenha();
             

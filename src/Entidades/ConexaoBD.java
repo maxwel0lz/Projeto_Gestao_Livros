@@ -174,5 +174,30 @@ public class ConexaoBD {
         return arrAdm;
     }
     
-    
+    public ArrayList<Administrador> LerAdministrador(ArrayList<Administrador> arrAdm){
+       Connection conectar = Conectar();
+        String sql = "SELECT * FROM dblivros.tbusuarios;";
+        Statement st = null;
+        
+        try {
+            st = conectar.createStatement();
+            ResultSet resu = st.executeQuery(sql);
+            
+            while(resu.next()){
+                Administrador adm = new Administrador();
+                adm.setNome(resu.getString("nome"));
+                adm.setUsuario(resu.getString("usuario"));
+                adm.setSenha(resu.getString("senha"));
+                arrAdm.add(adm);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conectar.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrAdm;
+    }
 }

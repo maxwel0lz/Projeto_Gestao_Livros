@@ -6,6 +6,9 @@ public class Administrador {
     String usuario;
     String senha;
 
+    public Administrador() {
+    }
+
     
     public Administrador(String nome,String usuario, String senha){
         this.nome=nome;
