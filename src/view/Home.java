@@ -6,7 +6,7 @@ import Entidades.Livros;
 import Entidades.ModelLivros;
 import javax.swing.table.DefaultTableModel;
 
-//import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;
 
 
 
@@ -58,7 +58,6 @@ public class Home extends javax.swing.JFrame {
         tabela.setForeground(new java.awt.Color(255, 255, 255));
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"ola", null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
@@ -263,15 +262,21 @@ public class Home extends javax.swing.JFrame {
     
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
        Livros l = InfoLivro();
-       
        this.model.EditarLivro(l);
+       if(Integer.parseInt(txt_quantidade.getText()) < 3){
+            JOptionPane.showMessageDialog(null, "A Quantidade de livro esta abaixo de 3 unidades");
+        }
        Limpar();
     }//GEN-LAST:event_EditarActionPerformed
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         Livros l = InfoLivroCadastrar();
         this.model.cadastarLivro(l);
+        if(Integer.parseInt(txt_quantidade.getText()) < 3){
+            JOptionPane.showMessageDialog(null, "A Quantidade de livro esta abaixo de 3 unidades");
+        }
         Limpar();
+        
     }//GEN-LAST:event_CadastrarActionPerformed
     
     private Livros InfoLivroCadastrar(){

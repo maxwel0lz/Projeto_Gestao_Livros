@@ -21,8 +21,11 @@ public class ModelAdministrador {
             String nome2 = item.getUsuario();
             String senha1 = adm.getSenha();
             String senha2 = item.getSenha();
-            
-            aux = nome1.equals(nome2) && senha1.equals(senha2);
+            if(nome1.equals(nome2) && senha1.equals(senha2)){
+                aux = true;
+                break;
+            }
+             
             
         }
     return aux;
