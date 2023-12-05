@@ -271,7 +271,13 @@ public class Home extends javax.swing.JFrame {
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         Livros l = InfoLivroCadastrar();
-        this.model.cadastarLivro(l);
+        
+        if(l.verificarCampos(l)){
+            this.model.cadastarLivro(l);    
+        }else{
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+        }
+        
         if(Integer.parseInt(txt_quantidade.getText()) < 3){
             JOptionPane.showMessageDialog(null, "A Quantidade de livro esta abaixo de 3 unidades");
         }

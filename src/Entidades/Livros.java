@@ -25,7 +25,24 @@ public class Livros {
         this.quantidade = quantidade;
     }
     
-    
+    public boolean verificarCampos(Livros l){
+        boolean v = true;
+        String aux = "";
+        if(aux.equals(l.getTitulo().trim())){
+            v = false;
+        }if(aux.equals(l.getCategoria().trim())){
+            v = false;
+        }if(aux.equals(l.getAno().trim())){
+            v = false;
+        }if(aux.equals(l.getAutor().trim())){
+            v = false;
+        }if(aux.equals(l.getValor().trim())){
+            v = false;
+        }if(aux.equals(l.getQuantidade().trim())){
+            v = false;
+        }
+        return v;
+    }
     public int getId() {
         return id;
     }
